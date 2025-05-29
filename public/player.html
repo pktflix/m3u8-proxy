@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TS Player</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    body { background: #000; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    video { width: 90%; max-width: 800px; border: 2px solid cyan; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <video id="video" controls autoplay></video>
+  <script>
+    const video = document.getElementById('video');
+    const videoSrc = "/api/proxy?url=http://wt.mirosfresh.info:8080/live/zeqirhisenaj/3XHKKC3pgG/217.ts";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () { video.play(); });
+    } else {
+      video.src = videoSrc;
+    }
+  </script>
+</body>
+</html>
